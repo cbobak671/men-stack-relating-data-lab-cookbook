@@ -47,6 +47,7 @@ router.get("/ingredients", async (req, res) => {
     const currentIngredient = await Ingredient.findById(
       req.params.ingredientId
     );
+    res.render("/views/ingredients/show.ejs", { ingredients: ingredient });
   } catch (error) {
     console.log(error);
     res.redirect("/ingredients");
