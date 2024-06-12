@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show Recipe</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1><%= recipe.name %></h1>
+    <h3><%= recipe.ingredients %></h3>
+    <h3><%= recipe.instructions %></h3>
+    <br />
+    <br />
+    <form
+      action="/users/<%= user._id %>/recipes/<%= recipe._id %>?_method=DELETE"
+      method="POST"
+    >
+      <button type="submit">Delete this recipe</button>
+    </form>
+  </body>
+</html>
