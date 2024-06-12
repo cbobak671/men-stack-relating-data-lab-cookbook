@@ -42,6 +42,17 @@ router.get("/:recipeId", async (req, res) => {
   }
 });
 
+router.get("/ingredients", async (req, res) => {
+  try {
+    const currentIngredient = await Ingredient.findById(
+      req.params.ingredientId
+    );
+  } catch (error) {
+    console.log(error);
+    res.redirect("/ingredients");
+  }
+});
+
 router.get("/:recipeId/edit", async (req, res) => {
   try {
     const currentRecipe = await Recipe.findById(req.params.recipeId);
@@ -52,12 +63,12 @@ router.get("/:recipeId/edit", async (req, res) => {
   }
 });
 
-router.delete("/:recipeId", async (req, res) => {
+router.delete("/recipes/:recipeId", async (req, res) => {
   try {
     const currentRecipe = await Recipe.findById(req.params.recipeId);
     currentRecipe.recipes.id(req.params.recipeId).deleteOne();
     await currentRecipe.save();
-    res.redirect("recipes");
+    res.redirect("/recipes");
   } catch (err) {
     console.log(err);
     res.redirect("/");
