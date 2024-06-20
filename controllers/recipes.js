@@ -64,14 +64,27 @@ router.get("/:recipeId/edit", async (req, res) => {
   }
 });
 
-router.delete("/recipes/:recipeId", async (req, res) => {
+router.put("/:recipeId", async (req, res) => {
   try {
-    const currentRecipe = await Recipe.findById(req.params.recipeId);
-    currentRecipe.recipes.id(req.params.recipeId).deleteOne();
-    await currentRecipe.save();
+    const currentRecipe = await Recipe.findByIdAndUpdate(
+      req.params.recipeId,
+      req.body
+    );
+    res.redirect("/");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
+
+router.delete("/:recipeId", async (req, res) => {
+  try {
+    const currentRecipe = await Recipe.findById(
+      req.params.recipeId
+    ).deleteOne();
     res.redirect("/recipes");
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
     res.redirect("/");
   }
 });

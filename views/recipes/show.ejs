@@ -12,7 +12,7 @@
     <h3>Instructions: <%= recipe.instructions %></h3>
     <br />
         <form
-      action="/users/<%= user._id %>/recipes/<%= recipe._id %>?_method=DELETE"
+      action="/recipes/<%= recipe._id %>?_method=DELETE"
       method="POST"
     >
       <button type="submit">Delete this recipe</button>
